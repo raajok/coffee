@@ -8,7 +8,6 @@ import { Radio } from '@mui/material';
 import { RadioGroup } from '@mui/material';
 import { Input } from '@mui/material';
 import { InputAdornment } from '@mui/material';
-import { FormHelperText } from '@mui/material';
 
 function coffeeCalculation(measure, water) {
   return Math.round(((5.6 * water) / measure) * 100) / 100;
@@ -27,14 +26,16 @@ class WaterInput extends React.Component {
 
   render() {
     return (
-        <FormControl variant="standard" sx={{ m: 1, mt: 3, width: '25ch' }}>
+        <FormControl className="waterInput" variant="standard" sx={{ m: 1, mt: 3, width: '25ch' }}>
+          <label for="water">The amount of water in dl:</label>
           <Input
+            sx={{ width: '10ch'}}
+            id="water"
             type="number"
             value={this.props.water}
             onChange={this.handleChange}
             endAdornment={<InputAdornment position="end">dl</InputAdornment>}
           />
-          <FormHelperText>The amount of water in dl</FormHelperText>
         </FormControl>
     );
   }
@@ -109,11 +110,13 @@ class App extends React.Component {
 
     return (
       <div className="app">
-        <h1>Coffee calculator</h1>
-        <Measures onMeasureChange={this.handleMeasureChange} />
-        <WaterInput water={water} onWaterChange={this.handleWaterChange} />
-        <CalculationButton onCalculationClick={this.handleCalculationClick} />
-        <h1>You need {calculation} scoops of coffee!</h1>
+        <div className="card">
+          <h1>Coffee calculator</h1>
+          <Measures onMeasureChange={this.handleMeasureChange} />
+          <WaterInput water={water} onWaterChange={this.handleWaterChange} />
+          <CalculationButton onCalculationClick={this.handleCalculationClick} />
+          <h1>You need {calculation} scoops of coffee!</h1>
+        </div>
       </div>
     );
   }
